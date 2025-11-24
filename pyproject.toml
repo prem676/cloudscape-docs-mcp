@@ -1,5 +1,5 @@
 [project]
-name = "cloudscape-docs"
+name = "cloudscape-docs-mcp"
 version = "0.1.0"
 description = "MCP server for semantic search over AWS Cloudscape Design System documentation"
 readme = "README.md"

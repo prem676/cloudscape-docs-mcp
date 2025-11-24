@@ -1,7 +1,6 @@
 # Cloudscape Docs MCP Server
 
-A Model Context Protocol (MCP) server that provides semantic search over AWS Cloudscape Design System documentation. Built for AI agents and coding assistants to efficiently query component documentation.
-
+A Model Context Protocol (MCP) server that provides semantic search over AWS [Cloudscape Design](https://cloudscape.design/) System documentation. Built for AI agents and coding assistants to efficiently query component documentation.
 
 ## Features
 
@@ -12,7 +11,7 @@ A Model Context Protocol (MCP) server that provides semantic search over AWS Clo
 
 ## Transport
 
-This server uses the MCP [stdio transport](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#stdio) protocol.
+This server uses the MCP [stdio transport](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#stdio) protocol.\
 [Streamable HTTP transport](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#streamable-http) coming soon.
 
 ## Tools
@@ -21,6 +20,10 @@ This server uses the MCP [stdio transport](https://modelcontextprotocol.io/speci
 |------|-------------|
 | `cloudscape_search_docs` | Search the documentation index. Returns top 5 relevant files with titles and paths. |
 | `cloudscape_read_doc` | Read the full content of a specific documentation file. |
+
+![Cloudscape Docs MCP Tools in Action](.github/images/cloudscape-mcp-tools-search.png)
+
+---
 
 ## Requirements
 
