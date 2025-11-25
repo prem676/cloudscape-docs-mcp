@@ -4,7 +4,7 @@ A Model Context Protocol (MCP) server that provides semantic search over AWS [Cl
 
 ## Features
 
-- **Semantic Search** - Find relevant documentation using natural language queries powered by Jina Code 1.5B embeddings
+- **Semantic Search** - Find relevant documentation using natural language queries powered by [Jina Code Embeddings 0.5B](https://huggingface.co/jinaai/jina-code-embeddings-0.5b) model
 - **Token Efficient** - Returns concise file lists first, full content on demand
 - **Hardware Optimized** - Automatic detection of Apple Silicon (MPS), CUDA, or CPU
 - **Local Vector Store** - Uses LanceDB for fast, file-based vector search
@@ -149,7 +149,7 @@ cloudscape-docs-mcp/
 ├── server.py          # MCP server with search/read tools
 ├── ingest.py          # Documentation indexing script
 ├── pyproject.toml     # Project dependencies
-├── docs/              # Documentation files (not included)
+├── docs/              # Documentation files (partially curated)
 │   ├── components/    # Component documentation
 │   ├── foundations/   # Design foundations
 │   └── genai_patterns/# GenAI UI patterns
@@ -163,7 +163,7 @@ Key settings in `server.py` and `ingest.py`:
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `MODEL_NAME` | `jinaai/jina-code-embeddings-1.5b` | [Embedding model](https://huggingface.co/jinaai/jina-code-embeddings-1.5b) |
+| `MODEL_NAME` | `jinaai/jina-code-embeddings-0.5b` | [Embedding model](https://huggingface.co/jinaai/jina-code-embeddings-0.5b) |
 | `VECTOR_DIM` | `1536` | Vector dimensions |
 | `MAX_UNIQUE_RESULTS` | `5` | Max search results returned |
 | `DOCS_DIR` | `./docs` | Documentation source directory |
@@ -189,5 +189,5 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 - [AWS Cloudscape Design System](https://cloudscape.design/)
 - [Model Context Protocol](https://modelcontextprotocol.io/)
-- [Jina AI Embeddings](https://jina.ai/)
+- [Jina AI Code Embeddings]([https://jina.ai/](https://huggingface.co/jinaai/jina-code-embeddings-0.5b))
 - [LanceDB](https://lancedb.com/)
