@@ -189,5 +189,5 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 - [AWS Cloudscape Design System](https://cloudscape.design/)
 - [Model Context Protocol](https://modelcontextprotocol.io/)
-- [Jina AI Code Embeddings]([https://jina.ai/](https://huggingface.co/jinaai/jina-code-embeddings-0.5b))
+- [Jina AI Code Embeddings](https://huggingface.co/jinaai/jina-code-embeddings-0.5b))
 - [LanceDB](https://lancedb.com/)
