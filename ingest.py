@@ -28,8 +28,8 @@ from sentence_transformers import SentenceTransformer
 # --- Configuration ---
 DOCS_DIR = Path("./docs")
 DB_URI = Path("./data/lancedb")
-MODEL_NAME = "jinaai/jina-code-embeddings-0.5b"
-VECTOR_DIM = 896  # 1536 if 1.5b model
+MODEL_NAME = "Alibaba-NLP/gte-multilingual-base"
+VECTOR_DIM = 768
 EXTENSIONS = {".md", ".txt", ".tsx", ".ts"}
 
 # --- Setup Rich Console & Logging ---
@@ -123,16 +123,12 @@ def _load_resources() -> tuple[SentenceTransformer, Any]:
             # Mac Optimization Notes:
             # 1. We removed 'flash_attention_2' (CUDA only).
             # 2. We removed 'device_map'. We pass 'device' directly to SentenceTransformer.
-            # 3. We use 'dtype' instead of 'torch_dtype' (deprecation fix).
-            # 4. We use bfloat16 (supported on M1/M2/M3+).
+            # 3. Using float16 for faster inference on MPS.
 
             model = SentenceTransformer(
                 MODEL_NAME,
                 device=device,
-                model_kwargs={
-                    "dtype": torch.bfloat16,
-                },
-                tokenizer_kwargs={"padding_side": "left"},
+                model_kwargs={"torch_dtype": torch.float16},
                 trust_remote_code=True,
             )
 
@@ -180,11 +176,9 @@ def _process_files(
                     if not chunk_text.strip():
                         continue
 
-                    # Using task-specific prompt for documents
                     # show_progress_bar=False disables the internal tqdm of SentenceTransformer
                     vec = model.encode(
                         chunk_text,
-                        prompt_name="nl2code_document",
                         normalize_embeddings=True,
                         show_progress_bar=False,
                     ).tolist()

@@ -4,7 +4,7 @@ A Model Context Protocol (MCP) server that provides semantic search over AWS [Cl
 
 ## Features
 
-- **Semantic Search** - Find relevant documentation using natural language queries powered by [Jina Code Embeddings 0.5B](https://huggingface.co/jinaai/jina-code-embeddings-0.5b) model
+- **Semantic Search** - Find relevant documentation using natural language queries powered by [Alibaba GTE Multilingual Base](https://huggingface.co/Alibaba-NLP/gte-multilingual-base) model
 - **Token Efficient** - Returns concise file lists first, full content on demand
 - **Hardware Optimized** - Automatic detection of Apple Silicon (MPS), CUDA, or CPU
 - **Local Vector Store** - Uses LanceDB for fast, file-based vector search
@@ -67,7 +67,7 @@ This will:
 
 - Scan all files in `docs/`
 - Chunk content into ~2000 character segments
-- Generate embeddings using [Jina Code Embeddings 0.5B](https://huggingface.co/jinaai/jina-code-embeddings-0.5b) embedding model
+- Generate embeddings using [Alibaba GTE Multilingual Base](https://huggingface.co/Alibaba-NLP/gte-multilingual-base) embedding model
 - Store vectors in `data/lancedb/`
 
 > **Note:** Running `uv run ingest.py` multiple times is safe but performs a **full re-index** each time. The script uses `mode="overwrite"` which drops and recreates the database table. There is no incremental update or change detection—all documents are re-scanned and re-embedded on every run. This is idempotent (same docs produce the same result) but computationally expensive for large documentation sets.
@@ -163,8 +163,8 @@ Key settings in `server.py` and `ingest.py`:
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `MODEL_NAME` | `jinaai/jina-code-embeddings-0.5b` | [Embedding model](https://huggingface.co/jinaai/jina-code-embeddings-0.5b) |
-| `VECTOR_DIM` | `1536` | Vector dimensions |
+| `MODEL_NAME` | `Alibaba-NLP/gte-multilingual-base` | [Embedding model](https://huggingface.co/Alibaba-NLP/gte-multilingual-base) |
+| `VECTOR_DIM` | `768` | Vector dimensions |
 | `MAX_UNIQUE_RESULTS` | `5` | Max search results returned |
 | `DOCS_DIR` | `./docs` | Documentation source directory |
 | `DB_URI` | `./data/lancedb` | Vector database location |
@@ -189,5 +189,5 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 - [AWS Cloudscape Design System](https://cloudscape.design/)
 - [Model Context Protocol](https://modelcontextprotocol.io/)
-- [Jina AI Code Embeddings](https://huggingface.co/jinaai/jina-code-embeddings-0.5b))
+- [Alibaba GTE Multilingual](https://huggingface.co/Alibaba-NLP/gte-multilingual-base))
 - [LanceDB](https://lancedb.com/)

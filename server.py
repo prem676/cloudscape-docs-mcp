@@ -12,17 +12,18 @@ import lancedb
 import torch
 from mcp.server.fastmcp import FastMCP
 from sentence_transformers import SentenceTransformer
+from loguru import logger
 
 # --- Configuration ---
 DB_URI = Path("./data/lancedb")
-MODEL_NAME = "jinaai/jina-code-embeddings-1.5b"
+MODEL_NAME = "Alibaba-NLP/gte-multilingual-base"
 DOCS_ROOT = Path("docs")  # Used for path validation
 MAX_UNIQUE_RESULTS = 5
 
 # --- Initialize Server ---
 mcp = FastMCP(
     "CloudscapeDocs",
-    dependencies=["lancedb", "sentence-transformers", "torch", "accelerate"],
+    dependencies=["lancedb", "sentence-transformers", "torch"],
 )
 
 # --- Global Resources (Lazy Loaded) ---
@@ -34,9 +35,12 @@ _table: Any = None
 def _determine_device() -> str:
     """Check for MPS (Apple Silicon) or CUDA support."""
     if torch.backends.mps.is_available():
+        logger.debug("MPS is available")
         return "mps"
     if torch.cuda.is_available():
+        logger.debug("CUDA is available")
         return "cuda"
+    logger.debug("CPU is available")
     return "cpu"
 
 
@@ -46,17 +50,16 @@ def get_resources():
 
     if _table is None:
         device = _determine_device()
-        print(f"Initializing LanceDB and Embedding Model on {device.upper()}...")
+        logger.debug(f"Initializing LanceDB and Embedding Model on {device.upper()}...")
 
         _db = lancedb.connect(DB_URI)
         _table = _db.open_table("docs")
 
-        # Load model with Mac-optimized settings (bfloat16)
+        # Load model with Mac-optimized settings (float16)
         _model = SentenceTransformer(
             MODEL_NAME,
             device=device,
-            model_kwargs={"dtype": torch.bfloat16},
-            tokenizer_kwargs={"padding_side": "left"},
+            model_kwargs={"torch_dtype": torch.float16},
             trust_remote_code=True,
         )
 
@@ -96,10 +99,8 @@ def cloudscape_search_docs(query: str) -> str:
     """
     table, model = get_resources()
 
-    # Embed query using 'nl2code_query' prompt for Jina
     query_vec = model.encode(
         query,
-        prompt_name="nl2code_query",
         normalize_embeddings=True,
     ).tolist()
 
@@ -193,6 +194,5 @@ def cloudscape_read_doc(file_path: str) -> str:
 
 
 if __name__ == "__main__":
-    # Pre-load resources
-    get_resources()
+    # Resources are lazy-loaded on first tool call to avoid startup timeout
     mcp.run()
