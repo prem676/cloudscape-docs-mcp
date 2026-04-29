@@ -1,5 +1,7 @@
 # ☁️ cloudscape-docs-mcp - Easily Search Your Documentation
 
+[![SafeSkill 84/100](https://img.shields.io/badge/SafeSkill-84%2F100_Passes%20with%20Notes-yellow)](https://safeskill.dev/scan/prem676-cloudscape-docs-mcp)
+
 ## 🚀 Getting Started
 
 This guide helps you download and run the **cloudscape-docs-mcp** application. This application provides a semantically enriched search experience over AWS Cloudscape Design System documentation. You do not need technical knowledge to get started.
